@@ -7,10 +7,12 @@ class Enemy:
     def randName(self):
         return self.name_list[random.randrange(8)]
     
+
+    ##make rand stats for combat
     def __init__(self, difficulty):
         self.name = self.randName()
-        self.health = difficulty*3
-        self.damage = difficulty/2
+        self.health = difficulty*random.randrange(4)
+        self.damage = difficulty
         self.points = self.damage * self.health
 
     def bulkUp(self):

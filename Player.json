@@ -1,0 +1,9 @@
+[
+    {
+        "name": "John",
+        "score": 108.0,
+        "money": 2.0,
+        "health": 100.0,
+        "damage": 6
+    }
+]

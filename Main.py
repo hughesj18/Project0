@@ -63,14 +63,16 @@ class Player:
             #initial damage
             foe.health = foe.health - self.damage
             self.health = self.health - foe.damage
-            print(f"\nYou are at {self.health}.")
+            print(f"You dealt {self.damage} damage.")
+            print(f"\nYou are have {self.health} health left.")
+            
             try:
             #player choice    fight or run
                 retreat = input(f"{self.name} would you like to attempt to flee? (yes or no) ")
             except ValueError:
                 retreat = ''
 
-            ##Try method?
+        
             if retreat == "yes" or retreat == 'Yes' or retreat == 'YES':
                 roll = random.randrange(10)
                 if roll > difficulty:
@@ -83,25 +85,26 @@ class Player:
             
             else:
                 print("\nThat is nonsense so you chose to fight.")
+            
 
         #Victory Terms
-        print(f"\nThe {foe.name} has been defeated")
+        print(f"\nThe {foe.name} has been defeated!")
         print(f"You earned ${foe.points}.")
         self.score = self.score + foe.points
         self.money = self.money + foe.points
-        print(f"You now have ${self.money}")  
+        print(f"You now have {self.money} gold")  
     
-
+    #(Locked) Locations are to be implemented
     def town(self):
         print("\nWelcome traveler, get what you need the roads aren't safe")
         print("and you will need all the strength you can muster!")
         print('\n1. The Town Healer')
         print('2. The Smith')
-        print('3. The Enchanter')
-        print("4. The Old Begar")
-        print('5. The Howling Mine')
-        print('6. Raid Dungeon')
-        print('7. Boss Fight')
+        print('3. The Enchanter (Locked)')
+        print("4. The Old Begar (Locked)")
+        print('5. The Howling Mine (Locked)')
+        print('6. Raid Dungeon (Locked)')
+        print('7. Boss Fight (Locked)')
         print('0. Return to the wilds.')
 
         destination = -1
@@ -109,7 +112,7 @@ class Player:
             try:
                 destination = int(input("\nWhere would you like to go? "))
             except ValueError:
-                print("You must enter a value between 0-5")
+                print("You must enter a value between 0-2")
             if not (0 <= destination <= 2):
                 print('Please enter a valid value.')
         if destination == 0:
@@ -135,7 +138,7 @@ class Player:
             try:
                 heal = int(input("How much would you like to heal? (0-100) "))
             except ValueError:
-                print('Either start making sense or get out')
+                print('Either start making sense or get out.')
         if heal == 0:
             print('Hurry along then, and be careful on the trail')
         else:
@@ -151,15 +154,22 @@ class Player:
         print('"Buy what ya need kid"')
         print('\nIncrease your damage by 1 for each upgrade.')
         print(f'You have {self.money} gold.')
-        upgrade = str(input('Would you like to upgrade your weapon? (Yes or No) '))
 
-        if self.money >= 25 and (upgrade == 'yes' or upgrade == 'Yes' or upgrade =='YES'):
-            self.money = self.money - 25
-            self.damage = self.damage + 1
-            print('"Pleasure", he says shuffling you out the door.')
-            print(f'Your weapon now does {self.damage}.')
-        else :
-            print("Don't waste my time.")
+        trading = True
+        while trading:
+            upgrade = str(input('Would you like to upgrade your weapon? (Yes or No) '))
+            if self.money >= 25 and (upgrade == 'yes' or upgrade == 'Yes' or upgrade =='YES'):
+                self.money = self.money - 25
+                self.damage = self.damage + 1
+                print('"Pleasure", he says shuffling you out the door.')
+                print(f'Your weapon now does {self.damage}.')
+                trading = False
+            elif upgrade == 'no' or upgrade == 'NO' or upgrade =='No':
+                print("Then move along, I'm not here to chat")
+                trading = False
+            else :
+                print("Don't waste my time.")
+
 
 ##Json Loading method
 def load_player_data(name):

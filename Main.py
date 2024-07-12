@@ -107,6 +107,7 @@ class Player:
         print('7. Boss Fight (Locked)')
         print('0. Return to the wilds.')
 
+        #Loop to decide the location
         destination = -1
         while not (0 <= destination <= 2):
             try:
@@ -169,7 +170,7 @@ class Player:
                 trading = False
             else :
                 print("Don't waste my time.")
-
+##################################################################
 
 ##Json Loading method
 def load_player_data(name):

@@ -11,7 +11,7 @@ class Enemy:
     ##make rand stats for combat
     def __init__(self, difficulty):
         self.name = self.randName()
-        self.health = difficulty*random.randrange(4)
+        self.health = difficulty*random.randrange(1,4)
         self.damage = difficulty
         self.points = self.damage * self.health
 
@@ -20,7 +20,7 @@ class Enemy:
     def powerUp(self):
         self.damage = self.damage*2
 
-    #Temp name select
+
 
     
 
